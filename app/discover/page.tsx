@@ -9,7 +9,8 @@ type Shop = {
   mobile: string;
 };
 
-const shops = {
+// Define shops without 'as const' to allow for mutable types
+const shops: Record<string, Shop[]> = {
   "Flower Shop": [
     {
       name: "Blooming Flowers",
@@ -72,7 +73,8 @@ const shops = {
       photo: "/images/13.jpg",
       location: "Sagolband Moirang Leirak",
       mobile: "654-321-9876",
-    },{
+    },
+    {
       name: "La Gift",
       photo: "/images/14.jpg",
       location: "Sagolband Tera",
@@ -95,7 +97,7 @@ const shops = {
     {
       name: "Blooming Cake",
       photo: "/images/6.jpg",
-      location: "heiranggoi Thong",
+      location: "Heiranggoi Thong",
       mobile: "098-765-4321",
     },
     {
@@ -105,12 +107,13 @@ const shops = {
       mobile: "321-654-9870",
     },
     {
-      name: "Cake freind",
+      name: "Cake Friend",
       photo: "/images/8.jpg",
       location: "Khurai Lamlong",
       mobile: "654-321-9876",
-    },{
-      name: "Cake only",
+    },
+    {
+      name: "Cake Only",
       photo: "/images/9.jpg",
       location: "Sagolband",
       mobile: "098-765-4321",
@@ -123,7 +126,7 @@ const shops = {
     },
   ],
   // Add more categories and shops here
-} as const;
+};
 
 export default function DiscoverPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -176,22 +179,11 @@ export default function DiscoverPage() {
       <div className={styles.videoContainer}>
         <div className={styles.videoColumn}>
           <video autoPlay loop muted playsInline className={styles.backgroundVideo}>
-            <source src="/videos/discover.mp4" type="video/mp4" />
+            <source src="/videos/175.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className={styles.videoColumn}>
-          <video autoPlay loop muted playsInline className={styles.backgroundVideo}>
-            <source src="/videos/discover.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div className={styles.videoColumn}>
-          <video autoPlay loop muted playsInline className={styles.backgroundVideo}>
-            <source src="/videos/discover.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        {/* Other video columns... */}
       </div>
 
       <div className={styles.categories}>
@@ -211,6 +203,7 @@ export default function DiscoverPage() {
           </div>
         ))}
       </div>
+
       <div className={styles.statsContainer}>
         <div className={styles.stat}>
           <p className={styles.statValue}>Delivered <span className={styles.highlight}>{parcels}+</span> parcels</p>
