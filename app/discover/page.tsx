@@ -175,7 +175,7 @@ export default function DiscoverPage() {
         </div>
       </div>
 
-      {/* Video Section */}
+      {/* Video Section with Two Videos */}
       <div className={styles.videoContainer}>
         <div className={styles.videoColumn}>
           <video autoPlay loop muted playsInline className={styles.backgroundVideo}>
@@ -183,7 +183,12 @@ export default function DiscoverPage() {
             Your browser does not support the video tag.
           </video>
         </div>
-        {/* Other video columns... */}
+        <div className={styles.videoColumn}>
+          <video autoPlay loop muted playsInline className={styles.backgroundVideo}>
+            <source src="/videos/nachom.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
 
       <div className={styles.categories}>
