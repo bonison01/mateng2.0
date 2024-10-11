@@ -15,8 +15,8 @@ type Video = {
   description: string;
 };
 
-// Define video data
-const videos: Video[] = [
+// Predefined video data
+const initialVideos: Video[] = [
   {
     name: "Beautiful Blossoms",
     src: "/videos/175.mp4",
@@ -29,7 +29,7 @@ const videos: Video[] = [
   },
 ];
 
-// Define shops with images
+// Predefined shop data with photos
 const shops: Record<string, Shop[]> = {
   "Flower Shop": [
     {
@@ -50,9 +50,63 @@ const shops: Record<string, Shop[]> = {
       location: "Thangmeiband Polem leikai",
       mobile: "654-321-9876",
     },
-    // more shops...
+    {
+      name: "Tily Flowers",
+      photo: "/images/16.jpg",
+      location: "Singjamei Bazar",
+      mobile: "098-765-4321",
+    },
+    {
+      name: "Flower Petals",
+      photo: "/images/17.jpg",
+      location: "Keisamthong Top Leirak",
+      mobile: "321-654-9870",
+    },
+    {
+      name: "Li Flowers",
+      photo: "/images/18.jpg",
+      location: "Paona Bazar near Impact TV",
+      mobile: "654-321-9876",
+    },
   ],
-  // more shop categories...
+  "Gift Shop": [
+    {
+      name: "Lovely Gifts",
+      photo: "/images/4.jpg",
+      location: "Nongmeibung near Kutsum Oil Pump",
+      mobile: "123-456-7890",
+    },
+    {
+      name: "Gift Flowers",
+      photo: "/images/11.jpg",
+      location: "Singjamei Chingamakha",
+      mobile: "098-765-4321",
+    },
+    {
+      name: "Gift Petals",
+      photo: "/images/12.jpg",
+      location: "Sagolband Sayang",
+      mobile: "321-654-9870",
+    },
+    {
+      name: "Lily's Gift",
+      photo: "/images/13.jpg",
+      location: "Sagolband Moirang Leirak",
+      mobile: "654-321-9876",
+    },
+    {
+      name: "La Gift",
+      photo: "/images/14.jpg",
+      location: "Sagolband Tera",
+      mobile: "098-765-4321",
+    },
+    {
+      name: "Gift More",
+      photo: "/images/15.jpg",
+      location: "Kwakeithel Bazar",
+      mobile: "321-654-9870",
+    },
+  ],
 };
 
 export default function DiscoverPage() {
@@ -60,8 +114,14 @@ export default function DiscoverPage() {
   const [parcels, setParcels] = useState(0);
   const [merchants, setMerchants] = useState(0);
   const [businesses, setBusinesses] = useState(0);
+  const [videos, setVideos] = useState<Video[]>(initialVideos); // Store videos in state
+  const [newVideo, setNewVideo] = useState<{ name: string; description: string; file: File | null }>({
+    name: "",
+    description: "",
+    file: null,
+  });
+  const [isFormVisible, setIsFormVisible] = useState(false); // Toggle form visibility
 
-  // Create ref for multiple video elements
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]); // Store references to both videos
 
   // Animate the counting up of numbers
@@ -82,6 +142,55 @@ export default function DiscoverPage() {
         video.pause(); // Pause the other video
       }
     });
+  };
+
+  // Handle form input changes for the new video
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setNewVideo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle video file upload
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setNewVideo((prev) => ({
+      ...prev,
+      file,
+    }));
+  };
+
+  // Handle publishing the new video
+  const handlePublish = () => {
+    if (!newVideo.file) {
+      alert("Please upload a video file.");
+      return;
+    }
+
+    // Create a local URL for the uploaded video file
+    const newVideoURL = URL.createObjectURL(newVideo.file);
+
+    // Add the new video to the videos list
+    setVideos((prevVideos) => [
+      ...prevVideos,
+      {
+        name: newVideo.name,
+        src: newVideoURL,
+        description: newVideo.description,
+      },
+    ]);
+
+    // Reset the form and hide it
+    setNewVideo({
+      name: "",
+      description: "",
+      file: null,
+    });
+    setIsFormVisible(false);
+
+    alert("Video published successfully!");
   };
 
   const filteredShops = Object.entries(shops).reduce(
@@ -120,7 +229,40 @@ export default function DiscoverPage() {
         </div>
       </div>
 
-      {/* Video Section with Two Videos */}
+      {/* Upload Video Button */}
+      <div className={styles.uploadButtonContainer}>
+        <button onClick={() => setIsFormVisible(!isFormVisible)} className={styles.uploadButton}>
+          {isFormVisible ? "Cancel" : "Upload a Video"}
+        </button>
+      </div>
+
+      {/* Video Upload Form */}
+      {isFormVisible && (
+        <div className={styles.uploadSection}>
+          <h2>Upload Your Own Video</h2>
+          <input
+            type="text"
+            name="name"
+            placeholder="Video Name"
+            value={newVideo.name}
+            onChange={handleInputChange}
+            className={styles.inputField}
+          />
+          <textarea
+            name="description"
+            placeholder="Video Description"
+            value={newVideo.description}
+            onChange={handleInputChange}
+            className={styles.textArea}
+          ></textarea>
+          <input type="file" accept="video/*" onChange={handleFileChange} className={styles.inputFile} />
+          <button onClick={handlePublish} className={styles.publishButton}>
+            Publish Video
+          </button>
+        </div>
+      )}
+
+      {/* Video Section */}
       <div className={styles.videoContainer}>
         {filteredVideos.map((video, index) => (
           <div key={video.name} className={styles.videoColumn}>
@@ -144,6 +286,7 @@ export default function DiscoverPage() {
         ))}
       </div>
 
+      {/* Shop Section with Photos */}
       <div className={styles.categories}>
         {filteredShops.map(({ category, shops }) => (
           <div key={category} className={styles.category}>
