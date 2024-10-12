@@ -48,7 +48,7 @@ const GlobalHeader = () => {
           Services
         </Link>
         <Link href="https://mtg-task-app.vercel.app/form/create-new-task" className={styles.createTaskButton} onClick={handleMenuClose}>
-          Create Task
+          Order Management Beta Version
         </Link>
         <Link href="/login" onClick={handleMenuClose}>
           <FaUser className={styles.icon} aria-label="Login" />

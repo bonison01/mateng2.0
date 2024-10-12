@@ -37,8 +37,8 @@ export function MatengContent() {
   return (
     <div className={styles.container}>
       <div className={styles.banner}>
-        <div className={styles.bannerText}>
-          <p>What do We do?</p>
+        <div className={styles.bannerDescription}>
+          <h1>What do We do?</h1>
         </div>
         <div className={styles.bannerDescription}>
           <p>
