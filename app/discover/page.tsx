@@ -48,11 +48,9 @@ const DiscoverPage: React.FC = () => {
   // Enhanced search logic to check for matches in both category and shop name
   const filteredShops = Object.entries(shops).reduce(
     (acc, [category, shopList]) => {
-      // Check if the search term matches the category name or a shop's name/location/mobile
       const isCategoryMatch = category.toLowerCase().includes(searchTerm.toLowerCase());
       const isSelectedCategory = selectedCategory === "" || selectedCategory === category;
 
-      // Filter the shops if the search term matches either the shop name, location, mobile, or the category name
       const filteredList = shopList.filter(
         (shop) =>
           shop.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -61,7 +59,6 @@ const DiscoverPage: React.FC = () => {
           isCategoryMatch
       );
 
-      // Push matching categories or filtered shops into the accumulator
       if ((filteredList.length > 0 || isCategoryMatch) && isSelectedCategory) {
         acc.push({ category, shops: filteredList.length > 0 ? filteredList : shopList });
       }
@@ -96,6 +93,11 @@ const DiscoverPage: React.FC = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
+  };
+
+  // Function to redirect to Instagram page
+  const handleMoreVideosRedirect = () => {
+    window.open("https://www.instagram.com/mateng.discovery/", "_blank");
   };
 
   return (
@@ -148,6 +150,13 @@ const DiscoverPage: React.FC = () => {
           </button>
         </div>
       )}
+
+      {/* More Videos Redirect Button */}
+      <div className={styles.moreVideosContainer}>
+        <button onClick={handleMoreVideosRedirect} className={styles.moreVideosButton}>
+          More Videos
+        </button><br/><br/>
+      </div>
 
       {/* Category Dropdown */}
       <div className={styles.dropdownContainer}>
