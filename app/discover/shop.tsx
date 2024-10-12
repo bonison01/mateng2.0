@@ -443,7 +443,7 @@ export type Shop = {
   "Nursery Plant": [
     {
       name: "Green Keep",
-      photo: "/images/green.jpg",
+      photo: "/images/greenkeep.jpg",
       description: "A wide variety of plants and gardening tools for your home garden.",
       location: "Canchipur",
       mobile: "",
