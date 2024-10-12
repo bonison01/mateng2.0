@@ -99,6 +99,9 @@
   font-size: 1.2rem; /* Slightly larger font size */
   font-weight: bold; /* Make the text bold */
 }
+.rrr {
+  color: rgb(7, 92, 33); /* Footer text color */
+}
 
 /* Footer Styles */
 .footer {

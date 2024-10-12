@@ -1,73 +1,142 @@
+/* Desktop styles (unchanged) */
 .discover {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  flex: 1; /* Allow discover to take up available space */
-  background-color: #ffffff; /* Background color */
-  margin-top: 50px; /* Add margin to push content lower */
+  flex: 1;
+  background-color: #ffffff;
+  margin-top: 50px;
 }
 
 .landingView {
   text-align: center;
-  max-width: 900px; /* Increase max width for better readability */
-  padding: 40px; /* More padding to ensure content doesn't touch the edges */
+  max-width: 900px;
+  padding: 40px;
 }
 
-/* h1 */
 .landingTitle {
-  font-size: 5rem; /* Smaller font size for the title */
-  margin-bottom: 20px; /* Adjusted bottom margin for spacing */
+  font-size: 5rem;
+  margin-bottom: 20px;
 }
 
 .statsContainer {
   display: flex;
   justify-content: space-around;
   margin-top: 40px;
-  align-items: center; /* Center align items vertically */
+  align-items: center;
 }
 
 .stat {
   text-align: center;
-  padding: 0 20px; /* Added horizontal padding for space around each stat */
+  padding: 0 20px;
 }
 
 .statValue {
   font-size: 24px;
-  margin: 10px 0; /* Added vertical margin for spacing above and below */
+  margin: 10px 0;
 }
 
 .highlight {
   font-weight: bold;
-  color: #0070f3;
+  color: #037718;
 }
 
 .separator {
   border-left: 1px solid #ccc;
   height: 40px;
-  margin: 0 20px; /* Add horizontal margin to the separator for space */
+  margin: 0 20px;
 }
 
 .buttonContainer {
   display: flex;
   justify-content: center;
-  gap: 40px; /* Increased gap between buttons */
-  margin-top: 70px; /* Add margin above buttons to create space from headings */
+  gap: 40px;
+  margin-top: 70px;
 }
 
-
 .button {
-  padding: 10px 20px; /* Adjust padding as needed */
-  font-size: 1.3rem; /* Adjust font size as needed */
-  background-color: #02592f; /* Button background color */
-  color: white; /* Button text color */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  text-decoration: none; /* Remove underline */
-  transition: background-color 0.3s; /* Smooth background color transition */
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  background-color: #02592f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
 .button:hover {
-  background-color: #136100; /* Darker shade on hover */
+  background-color: #136100;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  .discover {
+    margin-top: 0;
+    min-height: 100vh; /* Make sure the section takes full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute content evenly */
+  }
+  .body {
+    border: 3px solid #000; /* Main border */
+    outline: 3px solid #0070f3; /* Stroke effect with different color */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+
+  .landingView {
+    max-width: 100%;
+    padding: 20px;
+    flex-grow: 1; /* Allow the landing view to grow and take available space */
+  }
+
+  .landingTitle {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  /* Add a line break between "We Drive" and "We Discover" */
+  .landingTitle::after {
+    display: block;
+    font-size: 2.5rem;
+  }
+
+  .statsContainer {
+    flex-direction: column;
+    margin-top: 15px;
+  }
+
+  .stat {
+    padding: 10px 0;
+  }
+
+  .statValue {
+    font-size: 20px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 10px; /* Reduce space between the last button and footer */
+  }
+
+  .button {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .footer {
+    margin-top: auto; /* Push the footer to the bottom of the page */
+  }
 }
