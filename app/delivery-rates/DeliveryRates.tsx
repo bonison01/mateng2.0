@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { distanceMap } from './distanceMap';
 import styles from './delivery-rates.module.css'; // Ensure this path is correct
+import Link from 'next/link'; // Import Link from Next.js
 
 const predefinedAddresses = Object.keys(distanceMap).map((address) => ({
   value: address,
@@ -11,8 +12,8 @@ const predefinedAddresses = Object.keys(distanceMap).map((address) => ({
 }));
 
 export default function DeliveryRates() {
-  const [fromAddress, setFromAddress] = useState<{ value: string, label: string } | null>(null);
-  const [toAddress, setToAddress] = useState<{ value: string, label: string } | null>(null);
+  const [fromAddress, setFromAddress] = useState<{ value: string; label: string } | null>(null);
+  const [toAddress, setToAddress] = useState<{ value: string; label: string } | null>(null);
   const [rate, setRate] = useState<number | null>(null);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function DeliveryRates() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Delivery Rates</h1>
+      <h1 className={styles.title}>Instant Pickup and Delivery Rates</h1>
 
       <div className={styles.inputWrapper}>
         <label className={styles.label} htmlFor="from">From Address</label>
@@ -46,7 +47,7 @@ export default function DeliveryRates() {
           className={styles.selectField}
           options={predefinedAddresses}
           value={fromAddress}
-          onChange={(selected) => setFromAddress(selected ? selected as { value: string, label: string } : null)}
+          onChange={(selected) => setFromAddress(selected ? selected as { value: string; label: string } : null)}
           placeholder="Select from address..."
         />
       </div>
@@ -59,7 +60,7 @@ export default function DeliveryRates() {
           className={styles.selectField}
           options={predefinedAddresses}
           value={toAddress}
-          onChange={(selected) => setToAddress(selected ? selected as { value: string, label: string } : null)}
+          onChange={(selected) => setToAddress(selected ? selected as { value: string; label: string } : null)}
           placeholder="Select to address..."
         />
       </div>
@@ -69,6 +70,22 @@ export default function DeliveryRates() {
           <p>Delivery Rate from {fromAddress?.label} to {toAddress?.label} is: ₹{rate}</p>
         </div>
       )}
+      <br/><br/><br/><br/><br/><br/><br/><br/>
+
+      {/* Fixed the Link component */}
+      <div>
+        <h2>Visit the link below to check delivery rates for addresses other than the ones we provided.</h2>
+      </div>
+      <div>
+        <Link href="/instant.pdf">Instant delivery rate outside Imphal</Link>
+      </div>
+      <br/>
+      <div>
+        <Link href="/stand.pdf">Standard delivery rates</Link>
+      </div><br/><br/><br/><br/>
+      <div>
+        <p>"For more information please contact to our Whatsapp number 8787649928"</p>
+      </div>
     </div>
   );
 }
