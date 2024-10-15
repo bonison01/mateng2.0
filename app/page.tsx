@@ -50,7 +50,7 @@ export default function DiscoverPage() {
           </div>
           <div className={styles.buttonContainer}>
             <Link href="/discover" className={styles.button}>Discover Now</Link>
-            <Link href="/pricing" className={styles.button}>Get Delivery Service</Link>
+            <Link href="https://wa.link/5b9wah" className={styles.button}>Get Delivery Service</Link>
           </div>
         </div>
       </div>

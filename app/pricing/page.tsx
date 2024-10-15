@@ -11,22 +11,22 @@ export default function Pricing() {
         <div className={styles.service}>
           <h2>Instant Pickup and Delivery</h2>
           <p>For information on our services, please contact us directly.</p>
-          <Link href="/contact" className={styles.link}>Contact Us</Link>
+          <Link href="https://wa.link/59odie" className={styles.link}>Contact Us</Link>
         </div>
         <div className={styles.service}>
           <h2>Standard Delivery</h2>
           <p>For information on our services, please contact us directly.</p>
-          <Link href="/contact" className={styles.link}>Contact Us</Link>
+          <Link href="https://wa.link/59odie" className={styles.link}>Contact Us</Link>
         </div>
         <div className={styles.service}>
           <h2>Business Discovery</h2>
           <p>For information on our services, please contact us directly.</p>
-          <Link href="/contact" className={styles.link}>Contact Us</Link>
+          <Link href="https://wa.link/59odie" className={styles.link}>Contact Us</Link>
         </div>
         <div className={styles.service}>
           <h2>Order Management Tools</h2>
           <p>For information on our services, please contact us directly.</p>
-          <Link href="/contact" className={styles.link}>Contact Us</Link>
+          <Link href="https://wa.link/59odie" className={styles.link}>Contact Us</Link>
         </div>
       </div>
     </main>
