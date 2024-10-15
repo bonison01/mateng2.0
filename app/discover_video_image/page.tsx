@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './page.module.css';
 import { shops, Shop } from './shop';  // Import `shops` data
+import { videos, Video } from './video'; // Import `videos` data from `video.tsx`
 
 const SHOPS_PER_PAGE = 10; // Number of shops per page
 
@@ -11,10 +12,11 @@ const DiscoverPage: React.FC = () => {
   const [parcels, setParcels] = useState<number>(0);
   const [merchants, setMerchants] = useState<number>(0);
   const [businesses, setBusinesses] = useState<number>(0);
+  const [visibleVideos, setVisibleVideos] = useState<number>(3); // Control how many videos to show initially
   const [currentPage, setCurrentPage] = useState<number>(1); // Current page for pagination
   const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for the selected category
-  const [selectedShop, setSelectedShop] = useState<Shop | null>(null); // State for the selected shop
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal visibility
+
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]); // Store references to videos
 
   // Animate the counting up of numbers
   useEffect(() => {
@@ -26,6 +28,15 @@ const DiscoverPage: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Ensure that when one video plays, the other is paused
+  const handleVideoPlay = (index: number) => {
+    videoRefs.current.forEach((video, i) => {
+      if (video && i !== index) {
+        video.pause(); // Pause other videos`
+      }
+    });
+  };
 
   // Handle category selection from the dropdown
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -66,6 +77,12 @@ const DiscoverPage: React.FC = () => {
     currentPage * SHOPS_PER_PAGE
   );
 
+  const filteredVideos = searchTerm ? [] : videos;
+
+  const handleLoadMore = () => {
+    setVisibleVideos((prevVisible) => prevVisible + 3); // Load 3 more videos when clicked
+  };
+
   const handleNextPage = () => {
     if (currentPage * SHOPS_PER_PAGE < filteredShops.length) {
       setCurrentPage((prevPage) => prevPage + 1);
@@ -78,26 +95,9 @@ const DiscoverPage: React.FC = () => {
     }
   };
 
-  // Handle clicking on a shop to open the modal
-  const handleShopClick = (shop: Shop) => {
-    setSelectedShop(shop);
-    setIsModalOpen(true);
-  };
-
-  // Handle closing the modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedShop(null);
-  };
-
-  // Handle clicking outside the modal content
-  const handleModalClick = () => {
-    closeModal();
-  };
-
-  // Prevent modal from closing when clicking inside the modal content
-  const handleModalContentClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  // Function to redirect to Instagram page
+  const handleMoreVideosRedirect = () => {
+    window.open("https://www.instagram.com/mateng.discovery/", "_blank");
   };
 
   return (
@@ -114,6 +114,48 @@ const DiscoverPage: React.FC = () => {
           />
           <button className={styles.searchButton}>Search</button>
         </div>
+      </div>
+
+      {/* Video Section */}
+      {filteredVideos.length > 0 && (
+        <div className={styles.videoContainer}>
+          {filteredVideos.slice(0, visibleVideos).map((video, index) => (
+            <div key={video.name} className={styles.videoColumn}>
+              <video
+                ref={(el) => {
+                  videoRefs.current[index] = el; // Assign the video element reference to the ref array
+                }}
+                className={styles.reelVideo}
+                autoPlay={index === 0} // Auto-play the first video only
+                loop
+                controls
+                muted={index !== 0} // Mute the second video by default
+                onPlay={() => handleVideoPlay(index)} // Pause the other video when this one plays
+              >
+                <source src={video.src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <h3>{video.name}</h3>
+              <p>{video.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Load More Videos Button */}
+      {visibleVideos < filteredVideos.length && (
+        <div className={styles.loadMoreContainer}>
+          <button onClick={handleLoadMore} className={styles.loadMoreButton}>
+            Load More Videos
+          </button>
+        </div>
+      )}
+
+      {/* More Videos Redirect Button */}
+      <div className={styles.moreVideosContainer}>
+        <button onClick={handleMoreVideosRedirect} className={styles.moreVideosButton}>
+          More Videos
+        </button><br/><br/>
       </div>
 
       {/* Category Dropdown */}
@@ -139,11 +181,7 @@ const DiscoverPage: React.FC = () => {
             <h2>{category}</h2>
             <div className={styles.shopList}>
               {shops.map((shop) => (
-                <div
-                  key={shop.name}
-                  className={styles.shopCard}
-                  onClick={() => handleShopClick(shop)} // Open modal on click
-                >
+                <div key={shop.name} className={styles.shopCard}>
                   <img src={shop.photo} alt={shop.name} className={styles.shopPhoto} />
                   <h3>{shop.name}</h3>
                   <p>{shop.description}</p>
@@ -194,22 +232,6 @@ const DiscoverPage: React.FC = () => {
           </p>
         </div>
       </div>
-
-      {/* Modal for Shop Details */}
-      {isModalOpen && selectedShop && (
-        <div className={styles.modal} onClick={handleModalClick}>
-          <div className={styles.modalContent} onClick={handleModalContentClick}>
-            <span className={styles.closeButton} onClick={closeModal}>
-              &times;
-            </span>
-            <img src={selectedShop.photo} alt={selectedShop.name} className={styles.shopPhoto} />
-            <h2>{selectedShop.name}</h2>
-            <p>{selectedShop.description}</p>
-            <p>Location: {selectedShop.location}</p>
-            <p>Contact: {selectedShop.mobile}</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

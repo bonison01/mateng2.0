@@ -1,128 +1,76 @@
 /* General Page Layout */
 .discover {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   color: #333;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the entire page content */
 }
 
-/* Header and Search Bar Styling */
+/* Header and Search Bar */
 .header {
-  margin-bottom: 20px;
-}
-
-/* Container for the More Videos button */
-.moreVideosContainer {
-  margin-top: 50px; /* Increased margin for better separation */
-  text-align: center;
-}
-
-/* Style for the More Videos button */
-.moreVideosButton {
-  padding: 10px 20px;
-  background-color: #1a5a04;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.moreVideosButton:hover {
-  background-color: #006931;
-}
-
-/* Search Bar */
-.searchContainer {
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.searchBar {
-  padding: 12px 16px;
-  font-size: 18px;
-  width: 50%;
-  max-width: 600px;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.searchBar:focus {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.searchButton {
-  padding: 12px 20px;
-  margin-left: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  border: none;
-  background-color: #136303;
-  color: white;
-  border-radius: 25px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-}
-
-.searchButton:hover {
-  background-color: #005bb5;
-}
-
-/* Video Container Styling */
-.videoContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.videoColumn {
-  flex: 1 1 45%;
+.searchContainer {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
-.reelVideo {
+  justify-content: center;
   width: 100%;
-  height: 220px; /* Adjust the video height */
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  max-width: 600px; /* Adjusted width for a wider search bar */
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
-/* Load More Videos Button */
-.loadMoreContainer {
-  text-align: center;
-  margin-top: 20px;
+.searchBar {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; /* Full width inside the container */
+  font-size: 16px;
+  transition: border 0.3s ease;
 }
 
-.loadMoreButton {
-  padding: 12px 24px;
-  background-color: #28a745;
+.searchBar:focus {
+  border: 1px solid #056505;
+  outline: none;
+}
+
+.searchButton {
+  padding: 12px 20px;
+  background-color: #005300;
   color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 5px;
+  margin-left: 10px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.loadMoreButton:hover {
-  background-color: #218838;
+.searchButton:hover {
+  background-color: #035703;
 }
 
-/* Shop Section with Photos */
+/* Category Dropdown */
+.dropdownContainer {
+  margin-bottom: 20px;
+}
+
+.categoryDropdown {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Shop Section */
 .categories {
-  margin-top: 30px; /* Adjusted margin for more spacing */
+  margin-top: 30px;
 }
 
 .category {
@@ -133,29 +81,6 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-/* Dropdown for selecting categories */
-.dropdownContainer {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 50px; /* Increased margin for better spacing from the button */
-}
-
-.categoryDropdown {
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.categoryDropdown:focus {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .shopCard {
@@ -163,13 +88,15 @@
   border-radius: 10px;
   padding: 15px;
   text-align: center;
-  width: 180px;
+  width: 200px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .shopCard:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .shopPhoto {
@@ -178,77 +105,80 @@
   margin-bottom: 10px;
 }
 
-/* Stats Section */
-.statsContainer {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+/* Shop Details */
+.shopDetails {
+  margin-top: 10px; /* Space above details */
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-align: left; /* Align text to the left */
 }
 
-.stat {
+/* Pagination Controls */
+.pagination {
+  margin-top: 20px;
   text-align: center;
 }
 
-.statValue {
+.paginationButton {
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #4cae4c;
+}
+
+.paginationButton:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.pageNumber {
+  margin: 0 10px;
+}
+
+/* Modal Styles */
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 20px;
   font-size: 24px;
+  cursor: pointer;
 }
 
-.highlight {
-  font-weight: bold;
-  color: #0070f3;
-}
-
-.separator {
-  border-left: 1px solid #ccc;
-  height: 40px;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .searchBar {
-    width: 80%;
-  }
-
-  .videoColumn {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-
-  .reelVideo {
-    height: 200px;
-  }
-
-  .loadMoreButton {
-    padding: 10px 16px;
-    font-size: 14px;
-  }
-
-  .shopCard {
-    width: 150px;
-  }
-
-  /* Adjust shop list to show 2 cards per row */
-  .shopList {
-    justify-content: space-between;
-  }
-
-  .shopCard {
-    flex: 1 1 calc(50% - 10px); /* Two cards per row */
-  }
-
-  .statsContainer {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .dropdownContainer {
-    margin-bottom: 60px; /* Added extra spacing for mobile between dropdown and videos */
-  }
-
-  .moreVideosContainer {
-    margin-top: 60px; /* Added more gap between dropdown and More Videos button for mobile */
-  }
+.shopPhoto {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
