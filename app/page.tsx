@@ -26,7 +26,7 @@ export default function DiscoverPage() {
   return (
     <>
       <Head>
-        <title>Mateng</title>
+        <title>Justmateng</title> {/* Set your custom tab name here */}
         <meta name="description" content="Your app description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
