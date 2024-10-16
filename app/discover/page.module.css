@@ -1,76 +1,59 @@
 /* General Page Layout */
 .discover {
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
   font-family: 'Arial', sans-serif;
   color: #333;
   max-width: 1200px;
-  margin: 0 auto; /* Center the entire page content */
+  margin: 0 auto;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
-/* Header and Search Bar */
-.header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
+/* Left section containing dropdown and shops */
+.leftSection {
+  flex: 1;
+  margin-right: 20px;
 }
 
-.searchContainer {
+/* Top Bar - align search and dropdown horizontally */
+.topBar {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px; /* Adjusted width for a wider search bar */
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  margin-bottom: 20px;
+  gap: 10px; /* Add spacing between the dropdown and search bar */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
-.searchBar {
-  padding: 12px 15px;
+/* Dropdown and Search Bar */
+.categoryDropdown, .searchBar {
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%; /* Full width inside the container */
   font-size: 16px;
-  transition: border 0.3s ease;
+  width: 250px;
 }
 
-.searchBar:focus {
-  border: 1px solid #056505;
-  outline: none;
-}
-
+/* Search Button */
 .searchButton {
   padding: 12px 20px;
-  background-color: #005300;
+  background-color: #5cb85c;
   color: white;
   border: none;
   border-radius: 5px;
-  margin-left: 10px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .searchButton:hover {
-  background-color: #035703;
-}
-
-/* Category Dropdown */
-.dropdownContainer {
-  margin-bottom: 20px;
-}
-
-.categoryDropdown {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  background-color: #4cae4c;
 }
 
 /* Shop Section */
 .categories {
-  margin-top: 30px;
+  margin-top: 0;
 }
 
 .category {
@@ -87,8 +70,8 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 15px;
-  text-align: center;
-  width: 200px;
+  text-align: left;
+  width: calc(25% - 20px); /* 4 cards per row on desktop */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -105,21 +88,56 @@
   margin-bottom: 10px;
 }
 
-/* Shop Details */
-.shopDetails {
-  margin-top: 10px; /* Space above details */
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-  border: 1px solid #ddd;
+/* Right section for the videos */
+.videoSection {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.videoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.videoColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Video reel size with vertical aspect ratio */
+.reelVideo {
+  width: 100%;
+  height: 533px; /* 9:16 aspect ratio for a reel-style video */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.loadMoreButton, .moreVideosButton {
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
   border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  text-align: left; /* Align text to the left */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loadMoreButton:hover, .moreVideosButton:hover {
+  background-color: #4cae4c;
 }
 
 /* Pagination Controls */
 .pagination {
   margin-top: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .paginationButton {
@@ -181,4 +199,45 @@
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
+}
+
+/* Media Queries for Mobile View */
+@media (max-width: 768px) {
+  .discover {
+    flex-direction: column;
+  }
+
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .categoryDropdown, .searchBar {
+    width: 100%; /* Full width on mobile */
+  }
+
+  .shopList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .shopCard {
+    width: 100%; /* Full width for shop cards on mobile */
+  }
+
+  .videoSection {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .reelVideo {
+    height: 400px; /* Adjust video height for mobile */
+  }
+
+  /* Adjust modal content for smaller screens */
+  .modalContent {
+    max-width: 90%;
+  }
 }

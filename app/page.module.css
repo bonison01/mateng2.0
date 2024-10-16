@@ -1,3 +1,10 @@
+/* General Reset for Body */
+.body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 /* Desktop styles (unchanged) */
 .discover {
   display: flex;
@@ -80,15 +87,6 @@
     flex-direction: column;
     justify-content: space-between; /* Distribute content evenly */
   }
-  .body {
-    border: 3px solid #000; /* Main border */
-    outline: 3px solid #0070f3; /* Stroke effect with different color */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  
 
   .landingView {
     max-width: 100%;
@@ -97,7 +95,7 @@
   }
 
   .landingTitle {
-    font-size: 2.5rem;
+    font-size: 3.5rem; /* Adjust size for better visibility */
     margin-bottom: 10px;
   }
 
@@ -133,7 +131,7 @@
 
   .button {
     width: 100%;
-    max-width: 250px;
+    max-width: 250px; /* Limit button width for better touchability */
   }
 
   .footer {
